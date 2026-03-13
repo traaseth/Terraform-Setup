@@ -1,0 +1,33 @@
+- name: Configure VM2
+  hosts: vm2
+  become: true
+
+  tasks:
+    - name: Create group
+      group:
+        name: devops
+        state: present
+
+    - name: Create user Test
+      user:
+        name: Test
+        groups: devops
+        append: yes
+        create_home: yes
+        shell: /bin/bash
+        state: present
+
+    - name: Create user Test2
+      user:
+        name: Test2
+        groups: devops
+        append: yes
+        create_home: yes
+        shell: /bin/bash
+        state: present
+
+    - name: Install htop
+      apt:
+        name: htop
+        state: present
+        update_cache: yes
